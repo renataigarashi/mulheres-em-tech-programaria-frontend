@@ -52,7 +52,7 @@ export function Content() {
         minibio: minibio,
         image: image
       })
-      const response = await Axios.get(`${baseURL}/addWoman`)
+      const response = await Axios.get(`${baseURL}/women`)
       setRepositories(response.data)
     }
     sendData()
