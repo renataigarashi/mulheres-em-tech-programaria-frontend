@@ -14,7 +14,7 @@ export function Content() {
   const [quotation, setQuotation] = useState('')
   const [image, setImage] = useState('')
   const [success, setSuccess] = useState(false)
-  const baseURL = 'https://mulheres-em-tech-programaria.onrender.com/women'
+  const baseURL = 'https://mulheres-em-tech-programaria.onrender.com'
 
   useEffect(() => {
     async function getData() {
