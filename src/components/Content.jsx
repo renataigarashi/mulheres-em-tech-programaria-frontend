@@ -9,12 +9,12 @@ import styles from '../styles/content.module.css'
 
 export function Content() {
   const [repositories, setRepositories] = useState([])
-  const [name, setName] = useState('')
+  const [nome, setNome] = useState('')
   const [minibio, setminibio] = useState('')
-  const [quotation, setQuotation] = useState('')
-  const [image, setImage] = useState('')
+  const [citacao, setCitacao] = useState('')
+  const [imagem, setImagem] = useState('')
   const [success, setSuccess] = useState(false)
-  const baseURL = 'https://mulheres-em-tech-programaria.onrender.com'
+  const baseURL = 'https://mulheres-em-tech-programaria.onrender.com/women'
 
   useEffect(() => {
     async function getData() {
@@ -25,7 +25,7 @@ export function Content() {
   }, [])
 
   function handleInputValueNome(event) {
-    setName(event.target.value)
+    setNome(event.target.value)
   }
 
   function handleInputValueminibio(event) {
@@ -33,24 +33,24 @@ export function Content() {
   }
 
   function handleInputValueImagem(event) {
-    setImage(event.target.value)
+    setImagem(event.target.value)
   }
 
   function handleInputValueCitacao(event) {
-    setQuotation(event.target.value)
+    setCitacao(event.target.value)
   }
 
   function handleCreateMessage(event) {
     event.preventDefault()
 
-    console.log('mensagem enviada', name, quotation, minibio, image)
+    console.log('mensagem enviada', nome, citacao, minibio, imagem)
 
     async function sendData() {
       await Axios.post(baseURL, {
-        name: name,
-        quotation: quotation,
+        nome: nome,
+        citacao: citacao,
         minibio: minibio,
-        image: image
+        imagem: imagem
       })
       const response = await Axios.get(baseURL)
       setRepositories(response.data)
@@ -58,10 +58,10 @@ export function Content() {
     sendData()
 
     setSuccess(true)
-    setName('')
+    setNome('')
     setminibio('')
-    setImage('')
-    setQuotation('')
+    setImagem('')
+    setCitacao('')
   }
 
   return (
@@ -78,14 +78,14 @@ export function Content() {
               return(
                 <div key={repo._id} className={styles.cardRepo}>
                 <div className={styles.cardImgContainer}>
-                  <img className={styles.cardRepoImage} src={repo.image} />
+                  <img className={styles.cardRepoImage} src={repo.imagem} />
                 </div>
                 <details>
                   <summary className={styles.cardRepoSummary}>
-                    {repo.name}
+                    {repo.nome}
                   </summary>
                   <p className={styles.cardRepoText}>{repo.minibio}</p>
-                  <q className={styles.cardRepoQuote}>{repo.quotation}</q>
+                  <q className={styles.cardRepoQuote}>{repo.citacao}</q>
                 </details>
               </div>
               )
@@ -98,14 +98,14 @@ export function Content() {
         <form  className={styles.form} onSubmit={handleCreateMessage}>
           <input 
             onChange={handleInputValueNome} 
-            placeholder="Digite o name"
-            value={name}
+            placeholder="Digite o nome"
+            value={nome}
             className={styles.formInput}
           />
           <textarea 
             onChange={handleInputValueImagem} 
-            placeholder="Digite o link da image"
-            value={image}
+            placeholder="Digite o link da imagem"
+            value={imagem}
             className={styles.formTextArea}
           />
           <textarea 
@@ -117,7 +117,7 @@ export function Content() {
           <textarea 
             onChange={handleInputValueCitacao} 
             placeholder="Digite a citação"
-            value={quotation}
+            value={citacao}
             className={styles.formTextArea}
           />
           <button className={styles.formButton} type="submit">Enviar mensagem</button>
